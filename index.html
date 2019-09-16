@@ -1,0 +1,33 @@
+<html>
+    <head>
+		<meta charset="UTF-8">
+        <script src="two.js"></script>
+    </head>
+    <body>
+        <div id="canvas"></div>
+    </body>
+    <script>
+        var elem = document.getElementById("canvas");
+        var two = new Two({ fullscreen: true }).appendTo(elem);
+		var group = two.makeGroup();
+
+        function makeHexagon(x, y) {
+			var hexagon = two.makePolygon(x, y, 30, 6);
+			var hue = Math.random() * 360;
+			var color = "hsl(" + hue + ", 100%, 50%)";
+			hexagon.fill = color;
+			hexagon.stroke = color;
+			hexagon.linewidth = 0;
+			hexagon.opacity = 0.5;
+			
+			group.add(hexagon);
+		}
+
+        document.addEventListener("mousedown", function(event) { makeHexagon(event.clientX, event.clientY); } );
+        document.addEventListener("touchstart", function(event) { makeHexagon(event.clientX, event.clientY); } );
+
+        two.bind('update', function (frameCount) {
+            group.rotation *= 1.1;
+        }).play();
+    </script>
+</html>
