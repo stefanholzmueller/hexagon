@@ -24,7 +24,7 @@
 		}
 
         document.addEventListener("mousedown", function(event) { makeHexagon(event.clientX, event.clientY); } );
-        document.addEventListener("touchstart", function(event) { makeHexagon(event.clientX, event.clientY); } );
+        document.addEventListener("touchstart", function(event) { makeHexagon(event.clientX, event.clientY); event.preventDefault(); } );
 
         two.bind('update', function (frameCount) {
             group.rotation *= 1.1;
